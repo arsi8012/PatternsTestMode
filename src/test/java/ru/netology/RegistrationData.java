@@ -8,5 +8,5 @@ import lombok.Data;
 public class RegistrationData {
         private String login;
         private String password;
-        private DataStatus status;
+        private String status;
 }

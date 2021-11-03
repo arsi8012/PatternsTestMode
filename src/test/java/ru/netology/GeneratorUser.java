@@ -12,7 +12,7 @@ import java.util.Locale;
 import static io.restassured.RestAssured.given;
 
 public class GeneratorUser {
-    static Faker faker = new Faker(new Locale("en"));
+    static Faker faker = new Faker(new Locale("ru"));
 
     private static RequestSpecification requestSpec = new RequestSpecBuilder()
             .setBaseUri("http://localhost")
@@ -33,43 +33,23 @@ public class GeneratorUser {
                 .statusCode(200); // код 200 OK
     }
 
-    public static RegistrationData dataUserActive() {
+    public static RegistrationData dataUser(String status) {
         RegistrationData regData = new RegistrationData(
                 faker.name().firstName(),
                 faker.internet().password(),
-                DataStatus.active
+                status
         );
         setUpAll(regData);
         return regData;
     }
 
-    public static RegistrationData dataUserBlocked() {
-        RegistrationData regData = new RegistrationData(
-                faker.name().firstName(),
-                faker.internet().password(),
-                DataStatus.blocked
-        );
-        setUpAll(regData);
-        return regData;
+    public static String dataWrongLogin() {
+        String loginFake = faker.name().fullName();
+        return loginFake;
     }
 
-    public static RegistrationData dataWrongLogin() {
-        RegistrationData regData = new RegistrationData(
-                faker.name().fullName(),
-                faker.internet().password(),
-                DataStatus.active
-        );
-        setUpAll(regData);
-        return regData;
-    }
-
-    public static RegistrationData dataWrongPassword() {
-        RegistrationData regData = new RegistrationData(
-                faker.name().fullName(),
-                faker.internet().password(),
-                DataStatus.active
-        );
-        setUpAll(regData);
-        return regData;
+    public static String dataWrongPassword() {
+        String pasFake = faker.internet().password();
+        return pasFake;
     }
 }
