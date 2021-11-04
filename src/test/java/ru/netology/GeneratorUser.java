@@ -5,7 +5,6 @@ import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
-import org.junit.jupiter.api.BeforeAll;
 
 import java.util.Locale;
 
@@ -22,8 +21,7 @@ public class GeneratorUser {
             .log(LogDetail.ALL)
             .build();
 
-    @BeforeAll
-    static void setUpAll(RegistrationData regData) {
+    static void sendRequest(RegistrationData regData) {
         given() // "дано"
                 .spec(requestSpec) // указываем, какую спецификацию используем
                 .body(regData) // передаём в теле объект, который будет преобразован в JSON
@@ -39,7 +37,7 @@ public class GeneratorUser {
                 faker.internet().password(),
                 status
         );
-        setUpAll(regData);
+        sendRequest(regData);
         return regData;
     }
 
